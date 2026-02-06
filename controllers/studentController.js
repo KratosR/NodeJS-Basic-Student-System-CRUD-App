@@ -18,11 +18,13 @@ exports.index = (req, res) => {
 
 exports.create = (req, res) => {
   const data = {
+    user_id: req.session.user.id,
     name: req.body.name,
     email: req.body.email,
     age: req.body.age,
     profile_image: req.file ? req.file.filename : null
   };
+
   Student.create(data, () => {
     req.flash('success', 'Student added');
     res.redirect('/students');
